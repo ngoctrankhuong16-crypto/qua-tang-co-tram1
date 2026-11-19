@@ -31,7 +31,6 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-/* ---------- Bối cảnh ---------- */
 .scene{
   position:relative;
   min-height:100vh;
@@ -61,7 +60,6 @@ body{
 }
 @keyframes drift{to{transform:translate3d(0,-3%,0) scale(1.08)}}
 
-/* Hai lớp sao có chu kỳ chia hết cho 240px nên cuộn lặp không bị giật */
 .stars{
   left:0;right:0;top:0;bottom:-240px;
   opacity:.7;
@@ -96,7 +94,6 @@ body{
   z-index:30;
 }
 
-/* ---------- Tiêu đề ---------- */
 .head{
   margin-bottom:28px;
   animation:fadeUp 1s var(--ease) both;
@@ -136,7 +133,6 @@ body{
 }
 .name{color:var(--gold);font-weight:600}
 
-/* ---------- Hộp quà ---------- */
 .gift-wrap{
   width:230px;
   height:290px;
@@ -280,7 +276,6 @@ body{
 @keyframes pulse{50%{opacity:.45}}
 .open .hint{opacity:0;max-height:0;margin-top:0;animation:none}
 
-/* ---------- Thiệp chúc ---------- */
 .card{
   width:min(100%,540px);
   margin-top:20px;
@@ -317,6 +312,325 @@ body{
   font-size:clamp(26px,7.4vw,34px);
   line-height:1.25;
   color:var(--gold);
+  text-shadow:0 0 18px rgba(255,183,77,.55);
+}
+.divider{
+  display:flex;align-items:center;gap:12px;margin:14px 0 18px;
+  color:var(--gold);font-size:14px;
+}
+.divider::before,.divider::after{
+  content:"";flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,223,156,.55));
+}
+.divider::after{transform:scaleX(-1)}
+
+.card-body p{
+  font-size:clamp(15px,4.1vw,17px);
+  line-height:1.85;
+  color:var(--ink);
+  margin-bottom:14px;
+  text-wrap:pretty;
+}
+.closing{
+  margin-top:6px;
+  text-wrap:balance;
+  font-family:'Playfair Display',Georgia,serif;
+  font-style:italic;
+  font-size:clamp(15px,4.1vw,17px);
+  color:#ffdf9c;
+  line-height:1.7;
+}
+.from{
+  margin-top:10px;
+  font-family:'Dancing Script',cursive;
+  font-size:22px;
+  color:var(--gold);
+}
+
+.actions{
+  margin-top:22px;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+.btn{
+  font:inherit;font-size:15px;
+  cursor:pointer;
+  border-radius:999px;
+  padding:12px 26px;
+  border:1px solid rgba(255,227,160,.8);
+  color:#fff;
+  transition:transform .2s,box-shadow .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn.primary{
+  background:linear-gradient(135deg,#d6336c,#8f2a5c);
+  box-shadow:0 6px 24px rgba(255,120,150,.35);
+}
+.btn.ghost{
+  background:transparent;
+  border-color:rgba(255,227,160,.3);
+  color:#ffe2ad;
+  font-size:13px;
+  padding:8px 18px;
+}
+.btn:active{transform:scale(.97)}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media (hover:hover){.btn:hover{transform:translateY(-2px)}}
+
+@media (max-width:360px){
+  .card{padding:24px 18px 22px}
+  .eyebrow::before,.eyebrow::after{width:24px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    animation-delay:0s!important;
+    transition-duration:.01ms!important;
+    transition-delay:0s!important;
+  }
+}
+</style>
+</head>
+
+<body>
+<main class="scene" id="scene">
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="twinkle" aria-hidden="true"></div>
+
+  <header class="head">
+    <p class="eyebrow"><span>20 · 11</span></p>
+    <h1 class="title">Chúc mừng Ngày Nhà giáo Việt Nam</h1>
+    <p class="subtitle">Một món quà nhỏ dành tặng cô <span class="name" id="tname"></span></p>
+  </header>
+
+  <div class="gift-wrap">
+    <div class="gift-stage">
+      <div class="shadow" aria-hidden="true"></div>
+      <div class="gift-float">
+        <button class="gift" id="gift" type="button" aria-expanded="false" aria-label="Mở món quà">
+          <span class="rays"></span>
+          <span class="letter">♥</span>
+          <span class="box"><span class="ribbon-v"></span></span>
+          <span class="glow"></span>
+          <span class="lid">
+            <span class="lid-ribbon"></span>
+            <span class="bow"><i class="loop l"></i><i class="loop r"></i><i class="knot"></i></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <p class="hint" id="hint">🎀 Chạm vào món quà để khám phá điều bất ngờ 🎀</p>
+
+  <section class="card" id="card" tabindex="-1" aria-label="Lời chúc" hidden>
+    <h2 class="greet stagger" id="greet"></h2>
+    <div class="divider stagger" aria-hidden="true">🌹</div>
+    <div class="card-body" id="cardBody"></div>
+    <p class="closing stagger" id="closing"></p>
+    <p class="from stagger" id="from" hidden></p>
+    <div class="actions stagger">
+      <button class="btn primary" id="celebrateBtn" type="button">🎆 Gửi ngàn yêu thương</button>
+      <button class="btn ghost" id="replayBtn" type="button">↺ Mở lại món quà</button>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  'use strict';
+
+  const CONFIG = {
+    teacher: 'Trâm',
+    from: '',
+    greeting: 'Gửi cô {name} kính yêu,',
+    paragraphs: [
+      'Nhân ngày Nhà giáo Việt Nam 20/11, kính chúc cô {name} một ngày thật vui vẻ và ý nghĩa!',
+      'Chúc cô luôn tràn đầy niềm vui, hạnh phúc và thật nhiều sức khỏe.',
+      'Mong cô luôn giữ mãi nụ cười, sự nhiệt huyết và nét trẻ trung trên hành trình trồng người.',
+      'Cảm ơn cô vì những bài học, sự tận tâm và những điều tốt đẹp cô đã dành cho chúng em. ❤️'
+    ],
+    closing: 'Chúc cô luôn hạnh phúc và thành công!'
+  };
+
+  const $ = id => document.getElementById(id);
+  const scene = $('scene'), gift = $('gift'), hint = $('hint'), card = $('card');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const pick = a => a[(Math.random() * a.length) | 0];
+
+  const fx = (() => {
+    const cv = $('fx'), ctx = cv.getContext('2d');
+    const small = Math.min(innerWidth, innerHeight) < 500;
+    const GOLD = ['#ffe0a1', '#ffcf7a', '#ffbd62', '#fff3c9'];
+    const PINK = ['#ff8fa8', '#ff5c7c', '#ffb3c6', '#ff6f91'];
+    const ALL = GOLD.concat(PINK, ['#ffffff']);
+    let W = 0, H = 0, parts = [], dust = [], raf = 0, last = 0;
+
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = innerWidth; H = innerHeight;
+      cv.width = Math.round(W * dpr);
+      cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (!dust.length && !reduceMotion) {
+        const n = small ? 26 : 46;
+        for (let i = 0; i < n; i++) {
+          dust.push({ x: rnd(0, W), y: rnd(0, H), r: rnd(.8, 2.2), v: rnd(6, 18), s: rnd(.6, 1.6), p: rnd(0, 6.28) });
+        }
+      }
+    }
+
+    function add(p) { if (parts.length < 700) parts.push(p); }
+
+    function burst(x, y, power = 1) {
+      const n = Math.round((reduceMotion ? 16 : small ? 34 : 52) * power);
+      const palette = Math.random() < .5 ? GOLD : pick([PINK, ALL]);
+      const base = rnd(200, 290) * (small ? .85 : 1) * Math.max(.6, power);
+      for (let i = 0; i < n; i++) {
+        const a = (i / n) * Math.PI * 2 + rnd(-.08, .08);
+        const sp = base * (.55 + Math.random() * .45);
+        add({ t: 'spark', x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 0, max: rnd(.9, 1.4), c: pick(palette), w: rnd(1.6, 2.6) });
+      }
+      kick();
+    }
+
+    function rocket(x, ty) {
+      x = x == null ? rnd(W * .15, W * .85) : x;
+      ty = ty == null ? rnd(H * .14, H * .42) : ty;
+      const dur = rnd(.8, 1.1);
+      add({ t: 'rocket', x, y: H + 8, vy: -(H + 8 - ty) / dur, ty });
+      kick();
+    }
+
+    function rain(count) {
+      const n = reduceMotion ? Math.min(count, 12) : count;
+      for (let i = 0; i < n; i++) {
+        add({
+          t: pick(['petal', 'petal', 'heart', 'conf']),
+          x: rnd(0, W), y: rnd(-H * .5, -20),
+          vx: rnd(-20, 20), vy: rnd(70, 160),
+          rot: rnd(0, 6.28), vr: rnd(-3, 3),
+          s: rnd(6, 12), sw: rnd(0, 6.28), sws: rnd(1.5, 3),
+          c: pick(ALL)
+        });
+      }
+      kick();
+    }
+
+    function update(p, dt) {
+      switch (p.t) {
+        case 'spark':
+          p.life += dt;
+          if (p.life >= p.max) { p.dead = true; return; }
+          p.vx *= 1 - 1.8 * dt;
+          p.vy = p.vy * (1 - 1.8 * dt) + 160 * dt;
+          p.x += p.vx * dt; p.y += p.vy * dt;
+          break;
+        case 'rocket':
+          p.y += p.vy * dt;
+          add({ t: 'spark', x: p.x, y: p.y, vx: rnd(-12, 12), vy: rnd(10, 40), life: 0, max: .45, c: '#ffd88a', w: 1.5 });
+          if (p.y <= p.ty) { burst(p.x, p.y, 1); p.dead = true; }
+          break;
+        default:
+          p.sw += p.sws * dt;
+          p.x += (p.vx + Math.sin(p.sw) * 35) * dt;
+          p.y += p.vy * dt;
+          p.rot += p.vr * dt;
+          if (p.y > H + 30) p.dead = true;
+      }
+    }
+
+    function draw(p) {
+      if (p.t === 'spark') {
+        ctx.globalCompositeOperation = 'lighter';
+        const a = 1 - p.life / p.max;
+        ctx.globalAlpha = a * a;
+        ctx.strokeStyle = p.c; ctx.lineWidth = p.w; ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(p.x - p.vx * .045, p.y - p.vy * .045);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+        return;
+      }
+      if (p.t === 'rocket') {
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.globalAlpha = 1; ctx.fillStyle = '#fff1c4';
+        ctx.beginPath(); ctx.arc(p.x, p.y, 2.4, 0, 6.283); ctx.fill();
+        return;
+      }
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.globalAlpha = .92; ctx.fillStyle = p.c;
+      ctx.save();
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      const s = p.s;
+      ctx.beginPath();
+      if (p.t === 'petal') {
+        ctx.moveTo(0, -s);
+        ctx.quadraticCurveTo(s * .9, -s * .2, 0, s);
+        ctx.quadraticCurveTo(-s * .9, -s * .2, 0, -s);
+      } else if (p.t === 'heart') {
+        ctx.moveTo(0, s * .7);
+        ctx.bezierCurveTo(-s * 1.2, -s * .1, -s * .6, -s * .95, 0, -s * .35);
+        ctx.bezierCurveTo(s * .6, -s * .95, s * 1.2, -s * .1, 0, s * .7);
+      } else {
+        ctx.scale(1, Math.cos(p.sw * 2));
+        ctx.rect(-s / 2, -s * .3, s, s * .6);
+      }
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawDust(t, dt) {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = '#ffe0a1';
+      for (const d of dust) {
+        d.y -= d.v * dt;
+        d.x += Math.sin(t * d.s + d.p) * 8 * dt;
+        if (d.y < -6) { d.y = H + 6; d.x = rnd(0, W); }
+        ctx.globalAlpha = .15 + .5 * (.5 + .5 * Math.sin(t * d.s * 2 + d.p));
+        ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 6.283); ctx.fill();
+      }
+    }
+
+    function step(now) {
+      const dt = Math.min(.05, (now - last) / 1000 || 0);
+      last = now;
+      ctx.clearRect(0, 0, W, H);
+      if (!reduceMotion) drawDust(now / 1000, dt);
+      let w = 0;
+      for (let i = 0; i < parts.length; i++) {
+        const p = parts[i];
+        update(p, dt);
+        if (!p.dead) {
+          draw(p);
+          parts[w++] = p;
+        }
+      }
+      parts.length = w;
+      if (parts.length || !reduceMotion) {
+        raf = requestAnimationFrame(step);
+      } else {
+        raf = 0;
+      }
+    }
+
+    function kick() {
+      if (!raf) {
+        last = performance.now();
+        raf = requestAnimationFrame(step);
+      }
+    }
+
+    function clear() {
+      parts.length = 0;
+      ctx.clearRect(0, 0, W, H);
+    }
+
+    (--gold);
   text-shadow:0 0 18px rgba(255,183,77,.55);
 }
 .divider{
