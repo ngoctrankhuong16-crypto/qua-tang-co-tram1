@@ -1,0 +1,384 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gift for Teacher Tram - 20/11</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+ min-height:100vh;
+ overflow-x:hidden;
+ background:radial-gradient(ellipse at center,#54214d,#1b102b 75%,#090714);
+ color:white;
+ font-family:Georgia,serif;
+ perspective:1000px;
+}
+
+.scene{
+ min-height:100vh;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ padding:30px 15px;
+ position:relative;
+ overflow:hidden;
+}
+
+.stars{
+ position:absolute;
+ inset:0;
+ background-image:
+ radial-gradient(#fff 1px,transparent 1px),
+ radial-gradient(#f6cb87 1px,transparent 1px);
+ background-size:65px 65px,105px 105px;
+ animation:stars 20s linear infinite;
+ opacity:.6;
+}
+@keyframes stars{
+ to{transform:translateY(-105px)}
+}
+
+.title{
+ position:relative;
+ z-index:3;
+ color:#ffe0a1;
+ font-size:23px;
+ letter-spacing:3px;
+ text-shadow:0 0 20px #ffbd62;
+ margin-bottom:90px;
+}
+
+.gift-stage{
+ position:relative;
+ width:230px;
+ height:210px;
+ transform-style:preserve-3d;
+ animation:levitate 3s ease-in-out infinite;
+ cursor:pointer;
+ z-index:5;
+}
+
+@keyframes levitate{
+ 50%{transform:translateY(-12px) rotateY(8deg)}
+}
+
+.gift{
+ position:absolute;
+ width:170px;
+ height:120px;
+ left:30px;
+ bottom:15px;
+ transform-style:preserve-3d;
+}
+
+.front{
+ position:absolute;
+ width:170px;
+ height:120px;
+ background:linear-gradient(135deg,#ff526f,#a60038);
+ border:2px solid #f9d17a;
+ transform:translateZ(35px);
+ box-shadow:inset 0 0 20px #ffb4b4;
+}
+
+.back{
+ position:absolute;
+ width:170px;
+ height:120px;
+ background:#87002e;
+ transform:translateZ(-35px);
+}
+.side{
+ position:absolute;
+ width:70px;
+ height:120px;
+ background:linear-gradient(90deg,#a00036,#e52d5c);
+}
+.left{transform:rotateY(-90deg) translateZ(35px);left:0}
+.right{transform:rotateY(90deg) translateZ(135px);left:0}
+
+.gold-ribbon{
+ position:absolute;
+ width:32px;
+ height:120px;
+ left:69px;
+ top:0;
+ background:linear-gradient(90deg,#c48b32,#fff1a8,#d69a37);
+ z-index:3;
+}
+
+.gift::after{
+ content:"";
+ position:absolute;
+ width:170px;
+ height:70px;
+ top:-35px;
+ background:linear-gradient(135deg,#ff7993,#a00037);
+ transform:rotateX(90deg) translateZ(0);
+}
+
+.lid{
+ position:absolute;
+ width:190px;
+ height:38px;
+ left:20px;
+ bottom:132px;
+ background:linear-gradient(135deg,#ff6682,#b30043);
+ border:2px solid #ffe09b;
+ border-radius:5px;
+ transform-style:preserve-3d;
+ z-index:10;
+ transition:1.5s cubic-bezier(.2,.8,.2,1);
+ box-shadow:0 5px 20px #0008;
+}
+
+.lid::before{
+ content:"";
+ position:absolute;
+ left:78px;
+ width:30px;
+ height:100%;
+ background:linear-gradient(90deg,#d7a13d,#fff1a4,#c28b2c);
+}
+
+.bow{
+ position:absolute;
+ top:-39px;
+ left:67px;
+ width:55px;
+ height:37px;
+ z-index:12;
+ transition:1.5s;
+}
+
+.bow:before,.bow:after{
+ content:"";
+ position:absolute;
+ width:35px;
+ height:27px;
+ border:9px solid #ffe09b;
+ border-radius:50% 50% 10% 50%;
+}
+.bow:before{transform:rotate(25deg)}
+.bow:after{left:24px;transform:scaleX(-1) rotate(25deg)}
+
+.open .lid{
+ transform:translateY(-100px) rotate(-22deg) translateZ(70px);
+}
+.open .bow{
+ transform:translateY(-100px) rotate(-22deg);
+}
+
+.glow{
+ position:absolute;
+ width:200px;
+ height:200px;
+ left:15px;
+ top:-50px;
+ border-radius:50%;
+ background:radial-gradient(circle,#ffe69a66,transparent 70%);
+ opacity:0;
+ transition:1s;
+}
+.open .glow{opacity:1}
+
+.hint{
+ margin-top:30px;
+ color:#ffe2ad;
+ font-size:15px;
+ animation:pulse 1.5s infinite;
+ position:relative;
+ z-index:5;
+}
+@keyframes pulse{50%{opacity:.4}}
+
+.message{
+ display:none;
+ position:relative;
+ z-index:6;
+ max-width:530px;
+ margin-top:35px;
+ padding:25px 20px;
+ background:#ffffff0d;
+ border:1px solid #ffdc9966;
+ border-radius:20px;
+ backdrop-filter:blur(12px);
+ box-shadow:0 0 40px #ffb65b22;
+ animation:reveal 2s ease forwards;
+}
+
+@keyframes reveal{
+ from{opacity:0;transform:translateY(40px) scale(.9)}
+ to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+.message h2{
+ color:#ffe1a0;
+ font-size:26px;
+ margin-bottom:20px;
+ text-shadow:0 0 15px #ffb74d;
+ animation:shine 3s infinite;
+}
+@keyframes shine{
+ 50%{text-shadow:0 0 25px #ffd27d}
+}
+
+.message p{
+ line-height:2;
+ font-size:17px;
+ color:#fff2e6;
+}
+
+.message .sign{
+ margin-top:20px;
+ color:#ffdf9c;
+ font-style:italic;
+}
+
+button{
+ margin-top:22px;
+ padding:12px 25px;
+ border:1px solid #ffe3a0;
+ border-radius:30px;
+ background:linear-gradient(135deg,#c82e60,#77234d);
+ color:white;
+ font-size:15px;
+ cursor:pointer;
+ box-shadow:0 0 20px #ffb45a44;
+}
+
+.particle{
+ position:fixed;
+ bottom:-40px;
+ pointer-events:none;
+ z-index:20;
+ animation:rise linear forwards;
+}
+@keyframes rise{
+ to{transform:translateY(-115vh) rotate(360deg);opacity:0}
+}
+
+.firework{
+ position:fixed;
+ width:5px;height:5px;
+ border-radius:50%;
+ background:#ffe3a0;
+ box-shadow:0 0 12px 5px #ffbd60;
+ animation:boom 1s ease-out forwards;
+ pointer-events:none;
+}
+@keyframes boom{
+ to{transform:scale(14);opacity:0}
+}
+
+@media(max-width:400px){
+ .title{font-size:18px}
+ .message h2{font-size:22px}
+ .message p{font-size:15px}
+}
+</style>
+</head>
+
+<body>
+<div class="scene">
+ <div class="stars"></div>
+
+ <div class="title">
+  ✨ HAPPY VIETNAMESE TEACHERS' DAY ✨
+ </div>
+
+ <div class="gift-stage" id="gift" onclick="openGift()">
+  <div class="glow"></div>
+  <div class="gift">
+   <div class="back"></div>
+   <div class="front"></div>
+   <div class="side left"></div>
+   <div class="side right"></div>
+   <div class="gold-ribbon"></div>
+  </div>
+  <div class="lid">
+   <div class="bow"></div>
+  </div>
+ </div>
+
+ <div class="hint" id="hint">
+  🎀 Chạm vào món quà để khám phá điều bất ngờ 🎀
+ </div>
+
+ <div class="message" id="message">
+  <h2>🌹 Chúc mừng ngày 20/11 🌹</h2>
+
+  <p>
+   Kính chúc cô <b style="color:#ffe0a1">Trâm</b>
+   một ngày Nhà giáo Việt Nam thật vui vẻ!<br><br>
+
+   Chúc cô luôn tràn đầy niềm vui,
+   hạnh phúc và thật nhiều sức khỏe.<br><br>
+
+   Mong cô luôn giữ mãi nụ cười,
+   sự nhiệt huyết và nét trẻ trung
+   trên hành trình trồng người.<br><br>
+
+   Cảm ơn cô vì những bài học,
+   sự tận tâm và những điều tốt đẹp
+   cô đã dành cho chúng em. ❤️
+  </p>
+
+  <div class="sign">
+   💐 Chúc cô luôn hạnh phúc và thành công! 💐
+  </div>
+
+  <button onclick="celebrate()">🎆 Gửi ngàn yêu thương</button>
+ </div>
+</div>
+
+<script>
+let opened=false;
+
+function openGift(){
+ if(opened)return;
+ opened=true;
+
+ document.getElementById("gift").classList.add("open");
+ document.getElementById("hint").style.display="none";
+
+ setTimeout(()=>{
+  document.getElementById("message").style.display="block";
+  celebrate();
+ },1100);
+}
+
+function celebrate(){
+ const items=["🌹","❤️","💖","🌸","✨","💐","⭐","🌷"];
+
+ for(let i=0;i<65;i++){
+  const p=document.createElement("div");
+  p.className="particle";
+  p.textContent=items[Math.floor(Math.random()*items.length)];
+  p.style.left=Math.random()*100+"vw";
+  p.style.fontSize=(15+Math.random()*22)+"px";
+  p.style.animationDuration=(3+Math.random()*5)+"s";
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(),8000);
+ }
+
+ for(let i=0;i<12;i++){
+  setTimeout(()=>{
+   const f=document.createElement("div");
+   f.className="firework";
+   f.style.left=(10+Math.random()*80)+"vw";
+   f.style.top=(10+Math.random()*65)+"vh";
+   document.body.appendChild(f);
+   setTimeout(()=>f.remove(),1200);
+  },i*180);
+ }
+}
+</script>
+</body>
+</html>
+
