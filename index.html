@@ -1,37 +1,34 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#1b102b">
-<meta name="color-scheme" content="dark">
 <title>Quà tặng cô Trâm · 20/11</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600&family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
+:root {
   --gold:#ffe0a1;
-  --gold-2:#ffbd62;
-  --ink:#fff2e6;
+  --pink:#ff5f80;
   --ease:cubic-bezier(.2,.8,.2,1);
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
 
-body{
+* {box-sizing:border-box;margin:0;padding:0}
+
+body {
   min-height:100vh;
   min-height:100dvh;
   background:#090714;
-  color:var(--ink);
-  font-family:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  color:#fff2e6;
+  font-family:'Be Vietnam Pro',sans-serif;
   overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
 }
 
-.scene{
+.scene {
   position:relative;
   min-height:100vh;
   min-height:100dvh;
@@ -41,27 +38,33 @@ body{
   justify-content:center;
   text-align:center;
   overflow:hidden;
-  padding:
-    max(28px,env(safe-area-inset-top))
-    max(18px,env(safe-area-inset-right))
-    max(32px,env(safe-area-inset-bottom))
-    max(18px,env(safe-area-inset-left));
-  background:radial-gradient(ellipse at 50% 35%,#54214d 0%,#1b102b 70%,#090714 100%);
+  padding:35px 18px;
+  background:radial-gradient(ellipse at 50% 35%,#54214d,#1b102b 70%,#090714);
 }
-.scene > *{position:relative;z-index:5}
 
-.aurora,.stars,.twinkle{position:absolute!important;pointer-events:none;z-index:0!important}
-.aurora{
+.scene>*:not(.aurora):not(.stars):not(.twinkle):not(#fx) {
+  position:relative;
+  z-index:5;
+}
+
+.aurora,.stars,.twinkle {
+  position:absolute;
   inset:0;
+  pointer-events:none;
+}
+
+.aurora {
   background:
-    radial-gradient(40% 30% at 18% 18%,rgba(255,140,170,.20),transparent 70%),
+    radial-gradient(40% 30% at 18% 18%,rgba(255,140,170,.2),transparent 70%),
     radial-gradient(36% 30% at 85% 78%,rgba(255,196,110,.15),transparent 70%);
   animation:drift 14s ease-in-out infinite alternate;
 }
-@keyframes drift{to{transform:translate3d(0,-3%,0) scale(1.08)}}
 
-.stars{
-  left:0;right:0;top:0;bottom:-240px;
+@keyframes drift {
+  to {transform:translateY(-3%) scale(1.08)}
+}
+
+.stars {
   opacity:.7;
   background-image:
     radial-gradient(1.5px 1.5px at 30px 40px,#fff,transparent 100%),
@@ -70,22 +73,26 @@ body{
     radial-gradient(1.6px 1.6px at 200px 190px,#ffe0a1,transparent 100%);
   background-size:120px 120px,120px 120px,240px 240px,240px 240px;
   animation:starsUp 40s linear infinite;
-  will-change:transform;
 }
-@keyframes starsUp{to{transform:translateY(-240px)}}
 
-.twinkle{
-  inset:0;
+@keyframes starsUp {
+  to {transform:translateY(-240px)}
+}
+
+.twinkle {
   background-image:
     radial-gradient(1.6px 1.6px at 50px 50px,#fff,transparent 100%),
-    radial-gradient(1.4px 1.4px at 150px 130px,#ffe0a1,transparent 100%),
-    radial-gradient(1.6px 1.6px at 100px 170px,#fff,transparent 100%);
+    radial-gradient(1.4px 1.4px at 150px 130px,#ffe0a1,transparent 100%);
   background-size:200px 200px;
   animation:twinkle 4s ease-in-out infinite alternate;
 }
-@keyframes twinkle{from{opacity:.15}to{opacity:.85}}
 
-#fx{
+@keyframes twinkle {
+  from {opacity:.15}
+  to {opacity:.85}
+}
+
+#fx {
   position:fixed;
   inset:0;
   width:100%;
@@ -94,330 +101,389 @@ body{
   z-index:30;
 }
 
-.head{
-  margin-bottom:28px;
-  animation:fadeUp 1s var(--ease) both;
+.head {
+  margin-bottom:25px;
+  animation:fadeUp 1s both;
 }
-.eyebrow{
-  display:flex;align-items:center;justify-content:center;gap:14px;
+
+.eyebrow {
   color:var(--gold);
   font-size:13px;
   letter-spacing:.45em;
   margin-bottom:12px;
 }
-.eyebrow span{padding-left:.45em}
-.eyebrow::before,.eyebrow::after{
-  content:"";width:38px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(255,224,161,.8));
-}
-.eyebrow::after{transform:scaleX(-1)}
 
-.title{
-  font-family:'Playfair Display',Georgia,serif;
-  font-weight:700;
+.title {
+  font-family:'Playfair Display',serif;
   font-size:clamp(22px,6.4vw,34px);
-  line-height:1.3;
-  letter-spacing:.02em;
-  text-wrap:balance;
+  line-height:1.35;
   color:var(--gold);
-  background:linear-gradient(180deg,#fff4d2,#ffd27d 55%,#f2a65a);
-  -webkit-background-clip:text;background-clip:text;
+  background:linear-gradient(#fff4d2,#ffd27d 55%,#f2a65a);
+  -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   filter:drop-shadow(0 0 18px rgba(255,189,98,.45));
 }
-.subtitle{
-  margin-top:12px;
-  font-size:clamp(13px,3.6vw,15px);
-  font-weight:300;
-  color:rgba(255,230,190,.85);
-}
-.name{color:var(--gold);font-weight:600}
 
-.gift-wrap{
+.subtitle {
+  margin-top:12px;
+  font-size:14px;
+  color:#ffe6be;
+}
+
+.name {color:var(--gold);font-weight:600}
+
+.gift-wrap {
   width:230px;
   height:290px;
   transition:height 1s var(--ease);
 }
-.gift-stage{
-  position:relative;
-  width:230px;height:290px;
+
+.gift-stage {
+  width:230px;
+  height:290px;
   transform-origin:50% 0;
   transition:transform 1s var(--ease);
-  animation:fadeUp 1.1s .2s var(--ease) both;
 }
-.open.revealed .gift-wrap{height:150px}
-.open.revealed .gift-stage{transform:scale(.5)}
 
-.shadow{
-  position:absolute;left:40px;bottom:20px;width:150px;height:22px;
-  background:radial-gradient(ellipse at center,rgba(0,0,0,.55),transparent 70%);
-  animation:shadowPulse 4s ease-in-out infinite;
-}
-@keyframes shadowPulse{50%{transform:scale(.86);opacity:.7}}
-
-.gift-float{
-  position:absolute;left:0;bottom:0;width:230px;height:230px;
+.gift-float {
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:230px;
+  height:230px;
   animation:levitate 4s ease-in-out infinite;
 }
-@keyframes levitate{50%{transform:translateY(-10px)}}
 
-.gift{
-  position:relative;display:block;
-  width:100%;height:100%;
-  padding:0;border:0;background:none;
-  appearance:none;-webkit-appearance:none;
+@keyframes levitate {
+  50% {transform:translateY(-10px)}
+}
+
+.gift {
+  position:relative;
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  background:none;
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
-  font:inherit;color:inherit;
 }
-.gift:focus-visible{outline:2px solid var(--gold);outline-offset:6px;border-radius:18px}
-.gift span{display:block;pointer-events:none}
 
-.rays{
-  position:absolute;left:50%;top:70px;
-  width:440px;height:440px;margin:-220px 0 0 -220px;
-  z-index:1;
-  opacity:0;transform:scale(.3);
-  transition:opacity 1s .2s,transform 1.4s var(--ease) .2s;
+.gift span {display:block;pointer-events:none}
+
+.shadow {
+  position:absolute;
+  left:40px;
+  bottom:20px;
+  width:150px;
+  height:22px;
+  background:radial-gradient(ellipse,rgba(0,0,0,.55),transparent 70%);
 }
-.rays::before{
-  content:"";position:absolute;inset:0;border-radius:50%;
+
+.rays {
+  position:absolute;
+  left:50%;
+  top:70px;
+  width:440px;
+  height:440px;
+  margin:-220px 0 0 -220px;
+  opacity:0;
+  transform:scale(.3);
+  transition:1.2s;
+}
+
+.rays::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
   background:repeating-conic-gradient(rgba(255,226,160,.36) 0 7deg,transparent 7deg 20deg);
-  -webkit-mask-image:radial-gradient(circle,#000 6%,transparent 68%);
   mask-image:radial-gradient(circle,#000 6%,transparent 68%);
   animation:spin 26s linear infinite;
 }
-@keyframes spin{to{transform:rotate(360deg)}}
-.open .rays{opacity:1;transform:scale(1)}
 
-.letter{
-  position:absolute;left:62px;bottom:70px;width:106px;height:84px;z-index:2;
+@keyframes spin {
+  to {transform:rotate(360deg)}
+}
+
+.open .rays {
+  opacity:1;
+  transform:scale(1);
+}
+
+.letter {
+  position:absolute;
+  left:62px;
+  bottom:70px;
+  width:106px;
+  height:84px;
+  z-index:2;
   border-radius:6px;
   background:linear-gradient(#fffaf0,#f8e6c8);
-  box-shadow:0 4px 14px rgba(0,0,0,.35);
-  display:grid!important;place-items:center;
-  color:#d81b50;font-size:32px;
+  box-shadow:0 4px 14px #0006;
+  display:grid!important;
+  place-items:center;
+  color:#d81b50;
+  font-size:32px;
   transition:transform 1.1s var(--ease) .35s;
 }
-.open .letter{transform:translateY(-64px) rotate(-4deg)}
 
-.box{
-  position:absolute;left:30px;bottom:40px;width:170px;height:120px;z-index:3;
+.open .letter {
+  transform:translateY(-100px) rotate(-8deg);
+}
+
+.box {
+  position:absolute;
+  left:30px;
+  bottom:40px;
+  width:170px;
+  height:120px;
+  z-index:3;
   border-radius:4px 4px 12px 12px;
-  background:linear-gradient(135deg,#ff5f80 0%,#d81b50 45%,#8f0a35 100%);
-  box-shadow:
-    inset 0 -14px 24px rgba(0,0,0,.25),
-    inset 0 8px 16px rgba(255,255,255,.18),
-    0 18px 40px rgba(0,0,0,.45);
+  background:linear-gradient(135deg,#ff5f80,#d81b50 45%,#8f0a35);
+  box-shadow:inset 0 -14px 24px #0004,0 18px 40px #0007;
   overflow:hidden;
 }
-.box::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.3) 50%,transparent 65%);
+
+.box::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(115deg,transparent 35%,#ffffff55 50%,transparent 65%);
   transform:translateX(-120%);
   animation:sheen 5s ease-in-out infinite;
 }
-@keyframes sheen{0%,60%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
 
-.ribbon-v,.lid-ribbon{
-  position:absolute!important;left:50%;top:0;bottom:0;width:28px;margin-left:-14px;
+@keyframes sheen {
+  0%,60% {transform:translateX(-120%)}
+  100% {transform:translateX(120%)}
+}
+
+.ribbon-v,.lid-ribbon {
+  position:absolute!important;
+  left:50%;
+  top:0;
+  bottom:0;
+  width:28px;
+  margin-left:-14px;
   background:linear-gradient(90deg,#b9822b,#fff0a6 45%,#d69a37 70%,#a8741f);
 }
 
-.glow{
-  position:absolute;left:20px;top:44px;width:190px;height:60px;z-index:4;
-  background:radial-gradient(ellipse at 50% 100%,rgba(255,236,172,.95),rgba(255,200,110,.4) 45%,transparent 72%);
-  opacity:0;transition:opacity 1s .3s;
+.glow {
+  position:absolute;
+  left:20px;
+  top:44px;
+  width:190px;
+  height:60px;
+  z-index:4;
+  background:radial-gradient(ellipse at 50% 100%,#ffecac,rgba(255,200,110,.4) 45%,transparent 72%);
+  opacity:0;
+  transition:opacity 1s;
 }
-.open .glow{opacity:1}
 
-.lid{
-  position:absolute;left:20px;bottom:154px;width:190px;height:42px;z-index:6;
+.open .glow {opacity:1}
+
+.lid {
+  position:absolute;
+  left:20px;
+  bottom:154px;
+  width:190px;
+  height:42px;
+  z-index:6;
   border-radius:8px;
   background:linear-gradient(135deg,#ff7090,#e0245a 50%,#a50d3d);
-  box-shadow:
-    inset 0 -6px 12px rgba(0,0,0,.22),
-    inset 0 4px 8px rgba(255,255,255,.25),
-    0 8px 20px rgba(0,0,0,.35);
+  box-shadow:inset 0 -6px 12px #0004,0 8px 20px #0005;
   transform-origin:0 100%;
   transition:transform 1.2s cubic-bezier(.2,1.25,.3,1);
 }
-.open .lid{transform:translate(-20px,-40px) rotate(-12deg)}
 
-.bow{position:absolute!important;left:50%;top:-30px;width:80px;height:44px;margin-left:-40px}
-.loop{
-  position:absolute!important;top:0;width:38px;height:30px;
-  border:8px solid #ffe3a0;
-  border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
-  background:rgba(255,200,120,.12);
-  box-shadow:inset 0 0 6px rgba(150,90,10,.5),0 2px 6px rgba(0,0,0,.3);
+.open .lid {
+  transform:translate(-20px,-40px) rotate(-18deg);
 }
-.loop.l{left:0;transform:rotate(-24deg);transform-origin:100% 100%}
-.loop.r{right:0;transform:rotate(24deg);transform-origin:0 100%}
-.knot{
-  position:absolute!important;left:50%;top:18px;width:20px;height:20px;margin-left:-10px;
+
+.bow {
+  position:absolute!important;
+  left:50%;
+  top:-30px;
+  width:80px;
+  height:44px;
+  margin-left:-40px;
+}
+
+.loop {
+  position:absolute!important;
+  top:0;
+  width:38px;
+  height:30px;
+  border:8px solid #ffe3a0;
+  border-radius:50%;
+}
+
+.loop.l {left:0;transform:rotate(-24deg)}
+.loop.r {right:0;transform:rotate(24deg)}
+
+.knot {
+  position:absolute!important;
+  left:50%;
+  top:18px;
+  width:20px;
+  height:20px;
+  margin-left:-10px;
   border-radius:50%;
   background:radial-gradient(circle at 35% 30%,#fff6c4,#e6b04a 60%,#a8741f);
-  box-shadow:0 2px 6px rgba(0,0,0,.4);
 }
 
-.hint{
+.hint {
   margin-top:22px;
-  max-height:56px;
-  overflow:hidden;
   font-size:14px;
-  line-height:1.5;
   color:#ffe2ad;
-  letter-spacing:.03em;
-  text-wrap:balance;
-  animation:pulse 2.2s ease-in-out infinite;
-  transition:opacity .4s,max-height .8s .2s,margin .8s .2s;
+  animation:pulse 2.2s infinite;
+  transition:opacity .4s;
 }
-@keyframes pulse{50%{opacity:.45}}
-.open .hint{opacity:0;max-height:0;margin-top:0;animation:none}
 
-.card{
+@keyframes pulse {
+  50% {opacity:.45}
+}
+
+.open .hint {opacity:0;pointer-events:none}
+
+.open.revealed .gift-wrap {height:150px}
+.open.revealed .gift-stage {transform:scale(.5)}
+
+.card {
   width:min(100%,540px);
   margin-top:20px;
   padding:30px 24px 26px;
   border-radius:24px;
-  outline:none;
-  background:linear-gradient(160deg,rgba(255,255,255,.13),rgba(255,255,255,.04));
-  border:1px solid rgba(255,220,153,.4);
-  -webkit-backdrop-filter:blur(14px);
+  background:linear-gradient(160deg,#ffffff20,#ffffff09);
+  border:1px solid #ffdc9966;
   backdrop-filter:blur(14px);
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.4),
-    0 0 50px rgba(255,182,91,.12),
-    inset 0 1px 0 rgba(255,255,255,.2);
-  animation:reveal 1.1s var(--ease) both;
-}
-@keyframes reveal{
-  from{opacity:0;transform:translateY(40px) scale(.94)}
-  to{opacity:1;transform:none}
-}
-.stagger{
-  opacity:0;
-  animation:fadeUp .9s var(--ease) forwards;
-  animation-delay:calc(.35s + var(--i,0) * .3s);
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(18px)}
-  to{opacity:1;transform:none}
+  box-shadow:0 20px 60px #0006,0 0 50px #ffb65b20;
+  animation:reveal 1s var(--ease) both;
 }
 
-.greet{
-  font-family:'Dancing Script','Playfair Display',cursive;
-  font-weight:700;
-  font-size:clamp(26px,7.4vw,34px);
-  line-height:1.25;
+.card[hidden] {display:none}
+
+@keyframes reveal {
+  from {opacity:0;transform:translateY(40px) scale(.94)}
+  to {opacity:1;transform:none}
+}
+
+.greet {
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(27px,7vw,35px);
   color:var(--gold);
-  text-shadow:0 0 18px rgba(255,183,77,.55);
+  text-shadow:0 0 18px #ffb74d88;
 }
-.divider{
-  display:flex;align-items:center;gap:12px;margin:14px 0 18px;
-  color:var(--gold);font-size:14px;
-}
-.divider::before,.divider::after{
-  content:"";flex:1;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(255,223,156,.55));
-}
-.divider::after{transform:scaleX(-1)}
 
-.card-body p{
-  font-size:clamp(15px,4.1vw,17px);
-  line-height:1.85;
-  color:var(--ink);
-  margin-bottom:14px;
-  text-wrap:pretty;
+.divider {
+  margin:16px 0;
+  color:var(--gold);
 }
-.closing{
-  margin-top:6px;
-  text-wrap:balance;
-  font-family:'Playfair Display',Georgia,serif;
+
+.card-body p {
+  font-size:clamp(14px,4vw,16px);
+  line-height:1.9;
+  margin-bottom:13px;
+}
+
+.closing {
+  margin-top:10px;
+  font-family:'Playfair Display',serif;
   font-style:italic;
-  font-size:clamp(15px,4.1vw,17px);
-  color:#ffdf9c;
+  color:var(--gold);
   line-height:1.7;
 }
-.from{
-  margin-top:10px;
+
+.from {
+  margin-top:12px;
   font-family:'Dancing Script',cursive;
-  font-size:22px;
+  font-size:23px;
   color:var(--gold);
 }
 
-.actions{
+.actions {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
   margin-top:22px;
-  display:flex;flex-direction:column;align-items:center;gap:12px;
 }
-.btn{
-  font:inherit;font-size:15px;
+
+.btn {
+  font:inherit;
   cursor:pointer;
   border-radius:999px;
   padding:12px 26px;
-  border:1px solid rgba(255,227,160,.8);
-  color:#fff;
-  transition:transform .2s,box-shadow .2s;
-  -webkit-tap-highlight-color:transparent;
+  border:1px solid #ffe3a0cc;
+  color:white;
 }
-.btn.primary{
+
+.primary {
   background:linear-gradient(135deg,#d6336c,#8f2a5c);
-  box-shadow:0 6px 24px rgba(255,120,150,.35);
+  box-shadow:0 6px 24px #ff789655;
 }
-.btn.ghost{
+
+.ghost {
   background:transparent;
-  border-color:rgba(255,227,160,.3);
+  border-color:#ffe3a04d;
   color:#ffe2ad;
   font-size:13px;
   padding:8px 18px;
 }
-.btn:active{transform:scale(.97)}
-.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-@media (hover:hover){.btn:hover{transform:translateY(-2px)}}
 
-@media (max-width:360px){
-  .card{padding:24px 18px 22px}
-  .eyebrow::before,.eyebrow::after{width:24px}
+.btn:active {transform:scale(.96)}
+
+@keyframes fadeUp {
+  from {opacity:0;transform:translateY(18px)}
+  to {opacity:1;transform:none}
 }
 
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{
+@media(max-width:360px) {
+  .card {padding:24px 18px}
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
     animation-duration:.01ms!important;
     animation-iteration-count:1!important;
-    animation-delay:0s!important;
     transition-duration:.01ms!important;
-    transition-delay:0s!important;
   }
 }
 </style>
 </head>
 
 <body>
+
 <main class="scene" id="scene">
-  <canvas id="fx" aria-hidden="true"></canvas>
-  <div class="aurora" aria-hidden="true"></div>
-  <div class="stars" aria-hidden="true"></div>
-  <div class="twinkle" aria-hidden="true"></div>
+  <div class="aurora"></div>
+  <div class="stars"></div>
+  <div class="twinkle"></div>
+  <canvas id="fx"></canvas>
 
   <header class="head">
-    <p class="eyebrow"><span>20 · 11</span></p>
+    <p class="eyebrow">20 · 11</p>
     <h1 class="title">Chúc mừng Ngày Nhà giáo Việt Nam</h1>
-    <p class="subtitle">Một món quà nhỏ dành tặng cô <span class="name" id="tname"></span></p>
+    <p class="subtitle">Một món quà nhỏ dành tặng cô <span class="name">Trâm</span></p>
   </header>
 
   <div class="gift-wrap">
     <div class="gift-stage">
-      <div class="shadow" aria-hidden="true"></div>
+      <div class="shadow"></div>
+
       <div class="gift-float">
-        <button class="gift" id="gift" type="button" aria-expanded="false" aria-label="Mở món quà">
+        <button class="gift" id="gift" aria-label="Mở hộp quà" aria-expanded="false">
           <span class="rays"></span>
           <span class="letter">♥</span>
           <span class="box"><span class="ribbon-v"></span></span>
           <span class="glow"></span>
           <span class="lid">
             <span class="lid-ribbon"></span>
-            <span class="bow"><i class="loop l"></i><i class="loop r"></i><i class="knot"></i></span>
+            <span class="bow">
+              <i class="loop l"></i>
+              <i class="loop r"></i>
+              <i class="knot"></i>
+            </span>
           </span>
         </button>
       </div>
@@ -426,15 +492,26 @@ body{
 
   <p class="hint" id="hint">🎀 Chạm vào món quà để khám phá điều bất ngờ 🎀</p>
 
-  <section class="card" id="card" tabindex="-1" aria-label="Lời chúc" hidden>
-    <h2 class="greet stagger" id="greet"></h2>
-    <div class="divider stagger" aria-hidden="true">🌹</div>
-    <div class="card-body" id="cardBody"></div>
-    <p class="closing stagger" id="closing"></p>
-    <p class="from stagger" id="from" hidden></p>
-    <div class="actions stagger">
-      <button class="btn primary" id="celebrateBtn" type="button">🎆 Gửi ngàn yêu thương</button>
-      <button class="btn ghost" id="replayBtn" type="button">↺ Mở lại món quà</button>
+  <section class="card" id="card" tabindex="-1" hidden>
+    <h2 class="greet">Gửi cô Trâm kính yêu,</h2>
+    <div class="divider">🌹 ✨ 🌹</div>
+
+    <div class="card-body">
+      <p>Nhân ngày Nhà giáo Việt Nam 20/11, kính chúc cô một ngày thật vui vẻ và ý nghĩa!</p>
+
+      <p>Chúc cô luôn tràn đầy niềm vui, hạnh phúc và thật nhiều sức khỏe.</p>
+
+      <p>Mong cô luôn giữ mãi nụ cười, sự nhiệt huyết và nét trẻ trung trên hành trình trồng người.</p>
+
+      <p>Cảm ơn cô vì những bài học, sự tận tâm và những điều tốt đẹp cô đã dành cho chúng em. ❤️</p>
+    </div>
+
+    <p class="closing">Chúc cô luôn hạnh phúc và thành công!</p>
+    <p class="from">Với tất cả sự kính trọng ❤️</p>
+
+    <div class="actions">
+      <button class="btn primary" id="celebrateBtn">🎆 Gửi ngàn yêu thương</button>
+      <button class="btn ghost" id="replayBtn">↺ Mở lại món quà</button>
     </div>
   </section>
 </main>
@@ -443,488 +520,290 @@ body{
 (() => {
   'use strict';
 
-  const CONFIG = {
-    teacher: 'Trâm',
-    from: '',
-    greeting: 'Gửi cô {name} kính yêu,',
-    paragraphs: [
-      'Nhân ngày Nhà giáo Việt Nam 20/11, kính chúc cô {name} một ngày thật vui vẻ và ý nghĩa!',
-      'Chúc cô luôn tràn đầy niềm vui, hạnh phúc và thật nhiều sức khỏe.',
-      'Mong cô luôn giữ mãi nụ cười, sự nhiệt huyết và nét trẻ trung trên hành trình trồng người.',
-      'Cảm ơn cô vì những bài học, sự tận tâm và những điều tốt đẹp cô đã dành cho chúng em. ❤️'
-    ],
-    closing: 'Chúc cô luôn hạnh phúc và thành công!'
-  };
-
   const $ = id => document.getElementById(id);
-  const scene = $('scene'), gift = $('gift'), hint = $('hint'), card = $('card');
-  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const rnd = (a, b) => a + Math.random() * (b - a);
-  const pick = a => a[(Math.random() * a.length) | 0];
 
-  const fx = (() => {
-    const cv = $('fx'), ctx = cv.getContext('2d');
-    const small = Math.min(innerWidth, innerHeight) < 500;
-    const GOLD = ['#ffe0a1', '#ffcf7a', '#ffbd62', '#fff3c9'];
-    const PINK = ['#ff8fa8', '#ff5c7c', '#ffb3c6', '#ff6f91'];
-    const ALL = GOLD.concat(PINK, ['#ffffff']);
-    let W = 0, H = 0, parts = [], dust = [], raf = 0, last = 0;
+  const scene = $('scene');
+  const gift = $('gift');
+  const card = $('card');
+  const hint = $('hint');
+  const canvas = $('fx');
+  const ctx = canvas.getContext('2d');
 
-    function resize() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      W = innerWidth; H = innerHeight;
-      cv.width = Math.round(W * dpr);
-      cv.height = Math.round(H * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      if (!dust.length && !reduceMotion) {
-        const n = small ? 26 : 46;
-        for (let i = 0; i < n; i++) {
-          dust.push({ x: rnd(0, W), y: rnd(0, H), r: rnd(.8, 2.2), v: rnd(6, 18), s: rnd(.6, 1.6), p: rnd(0, 6.28) });
-        }
-      }
-    }
+  const GOLD = ['#ffe0a1','#ffcf7a','#ffbd62','#fff3c9'];
+  const PINK = ['#ff8fa8','#ff5c7c','#ffb3c6','#ff6f91'];
+  const ALL = [...GOLD,...PINK,'#ffffff'];
 
-    function add(p) { if (parts.length < 700) parts.push(p); }
+  let W = 0, H = 0;
+  let particles = [];
+  let opened = false;
+  let raf = 0;
+  let last = 0;
 
-    function burst(x, y, power = 1) {
-      const n = Math.round((reduceMotion ? 16 : small ? 34 : 52) * power);
-      const palette = Math.random() < .5 ? GOLD : pick([PINK, ALL]);
-      const base = rnd(200, 290) * (small ? .85 : 1) * Math.max(.6, power);
-      for (let i = 0; i < n; i++) {
-        const a = (i / n) * Math.PI * 2 + rnd(-.08, .08);
-        const sp = base * (.55 + Math.random() * .45);
-        add({ t: 'spark', x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 0, max: rnd(.9, 1.4), c: pick(palette), w: rnd(1.6, 2.6) });
-      }
-      kick();
-    }
+  const random = (a,b) => Math.random()*(b-a)+a;
+  const pick = arr => arr[Math.floor(Math.random()*arr.length)];
 
-    function rocket(x, ty) {
-      x = x == null ? rnd(W * .15, W * .85) : x;
-      ty = ty == null ? rnd(H * .14, H * .42) : ty;
-      const dur = rnd(.8, 1.1);
-      add({ t: 'rocket', x, y: H + 8, vy: -(H + 8 - ty) / dur, ty });
-      kick();
-    }
-
-    function rain(count) {
-      const n = reduceMotion ? Math.min(count, 12) : count;
-      for (let i = 0; i < n; i++) {
-        add({
-          t: pick(['petal', 'petal', 'heart', 'conf']),
-          x: rnd(0, W), y: rnd(-H * .5, -20),
-          vx: rnd(-20, 20), vy: rnd(70, 160),
-          rot: rnd(0, 6.28), vr: rnd(-3, 3),
-          s: rnd(6, 12), sw: rnd(0, 6.28), sws: rnd(1.5, 3),
-          c: pick(ALL)
-        });
-      }
-      kick();
-    }
-
-    function update(p, dt) {
-      switch (p.t) {
-        case 'spark':
-          p.life += dt;
-          if (p.life >= p.max) { p.dead = true; return; }
-          p.vx *= 1 - 1.8 * dt;
-          p.vy = p.vy * (1 - 1.8 * dt) + 160 * dt;
-          p.x += p.vx * dt; p.y += p.vy * dt;
-          break;
-        case 'rocket':
-          p.y += p.vy * dt;
-          add({ t: 'spark', x: p.x, y: p.y, vx: rnd(-12, 12), vy: rnd(10, 40), life: 0, max: .45, c: '#ffd88a', w: 1.5 });
-          if (p.y <= p.ty) { burst(p.x, p.y, 1); p.dead = true; }
-          break;
-        default:
-          p.sw += p.sws * dt;
-          p.x += (p.vx + Math.sin(p.sw) * 35) * dt;
-          p.y += p.vy * dt;
-          p.rot += p.vr * dt;
-          if (p.y > H + 30) p.dead = true;
-      }
-    }
-
-    function draw(p) {
-      if (p.t === 'spark') {
-        ctx.globalCompositeOperation = 'lighter';
-        const a = 1 - p.life / p.max;
-        ctx.globalAlpha = a * a;
-        ctx.strokeStyle = p.c; ctx.lineWidth = p.w; ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(p.x - p.vx * .045, p.y - p.vy * .045);
-        ctx.lineTo(p.x, p.y);
-        ctx.stroke();
-        return;
-      }
-      if (p.t === 'rocket') {
-        ctx.globalCompositeOperation = 'lighter';
-        ctx.globalAlpha = 1; ctx.fillStyle = '#fff1c4';
-        ctx.beginPath(); ctx.arc(p.x, p.y, 2.4, 0, 6.283); ctx.fill();
-        return;
-      }
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.globalAlpha = .92; ctx.fillStyle = p.c;
-      ctx.save();
-      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-      const s = p.s;
-      ctx.beginPath();
-      if (p.t === 'petal') {
-        ctx.moveTo(0, -s);
-        ctx.quadraticCurveTo(s * .9, -s * .2, 0, s);
-        ctx.quadraticCurveTo(-s * .9, -s * .2, 0, -s);
-      } else if (p.t === 'heart') {
-        ctx.moveTo(0, s * .7);
-        ctx.bezierCurveTo(-s * 1.2, -s * .1, -s * .6, -s * .95, 0, -s * .35);
-        ctx.bezierCurveTo(s * .6, -s * .95, s * 1.2, -s * .1, 0, s * .7);
-      } else {
-        ctx.scale(1, Math.cos(p.sw * 2));
-        ctx.rect(-s / 2, -s * .3, s, s * .6);
-      }
-      ctx.fill();
-      ctx.restore();
-    }
-
-    function drawDust(t, dt) {
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = '#ffe0a1';
-      for (const d of dust) {
-        d.y -= d.v * dt;
-        d.x += Math.sin(t * d.s + d.p) * 8 * dt;
-        if (d.y < -6) { d.y = H + 6; d.x = rnd(0, W); }
-        ctx.globalAlpha = .15 + .5 * (.5 + .5 * Math.sin(t * d.s * 2 + d.p));
-        ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 6.283); ctx.fill();
-      }
-    }
-
-    function step(now) {
-      const dt = Math.min(.05, (now - last) / 1000 || 0);
-      last = now;
-      ctx.clearRect(0, 0, W, H);
-      if (!reduceMotion) drawDust(now / 1000, dt);
-      let w = 0;
-      for (let i = 0; i < parts.length; i++) {
-        const p = parts[i];
-        update(p, dt);
-        if (!p.dead) {
-          draw(p);
-          parts[w++] = p;
-        }
-      }
-      parts.length = w;
-      if (parts.length || !reduceMotion) {
-        raf = requestAnimationFrame(step);
-      } else {
-        raf = 0;
-      }
-    }
-
-    function kick() {
-      if (!raf) {
-        last = performance.now();
-        raf = requestAnimationFrame(step);
-      }
-    }
-
-    function clear() {
-      parts.length = 0;
-      ctx.clearRect(0, 0, W, H);
-    }
-
-    (--gold);
-  text-shadow:0 0 18px rgba(255,183,77,.55);
-}
-.divider{
-  display:flex;align-items:center;gap:12px;margin:14px 0 18px;
-  color:var(--gold);font-size:14px;
-}
-.divider::before,.divider::after{
-  content:"";flex:1;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(255,223,156,.55));
-}
-.divider::after{transform:scaleX(-1)}
-
-.card-body p{
-  font-size:clamp(15px,4.1vw,17px);
-  line-height:1.85;
-  color:var(--ink);
-  margin-bottom:14px;
-  text-wrap:pretty;
-}
-.closing{
-  margin-top:6px;
-  text-wrap:balance;
-  font-family:'Playfair Display',Georgia,serif;
-  font-style:italic;
-  font-size:clamp(15px,4.1vw,17px);
-  color:#ffdf9c;
-  line-height:1.7;
-}
-.from{
-  margin-top:10px;
-  font-family:'Dancing Script',cursive;
-  font-size:22px;
-  color:var(--gold);
-}
-
-.actions{
-  margin-top:22px;
-  display:flex;flex-direction:column;align-items:center;gap:12px;
-}
-.btn{
-  font:inherit;font-size:15px;
-  cursor:pointer;
-  border-radius:999px;
-  padding:12px 26px;
-  border:1px solid rgba(255,227,160,.8);
-  color:#fff;
-  transition:transform .2s,box-shadow .2s;
-  -webkit-tap-highlight-color:transparent;
-}
-.btn.primary{
-  background:linear-gradient(135deg,#d6336c,#8f2a5c);
-  box-shadow:0 6px 24px rgba(255,120,150,.35);
-}
-.btn.ghost{
-  background:transparent;
-  border-color:rgba(255,227,160,.3);
-  color:#ffe2ad;
-  font-size:13px;
-  padding:8px 18px;
-}
-.btn:active{transform:scale(.97)}
-.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-@media (hover:hover){.btn:hover{transform:translateY(-2px)}}
-
-@media (max-width:360px){
-  .card{padding:24px 18px 22px}
-  .eyebrow::before,.eyebrow::after{width:24px}
-}
-
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    animation-delay:0s!important;
-    transition-duration:.01ms!important;
-    transition-delay:0s!important;
+  function resize() {
+    const dpr = Math.min(devicePixelRatio || 1,2);
+    W = innerWidth;
+    H = innerHeight;
+    canvas.width = W*dpr;
+    canvas.height = H*dpr;
+    canvas.style.width = W+'px';
+    canvas.style.height = H+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
   }
-}
-</style>
-</head>
 
-<body>
-<main class="scene" id="scene">
-  <canvas id="fx" aria-hidden="true"></canvas>
-  <div class="aurora" aria-hidden="true"></div>
-  <div class="stars" aria-hidden="true"></div>
-  <div class="twinkle" aria-hidden="true"></div>
+  addEventListener('resize',resize);
+  resize();
 
-  <header class="head">
-    <p class="eyebrow"><span>20 · 11</span></p>
-    <h1 class="title">Chúc mừng Ngày Nhà giáo Việt Nam</h1>
-    <p class="subtitle">Một món quà nhỏ dành tặng cô <span class="name" id="tname"></span></p>
-  </header>
+  function addParticle(p) {
+    if(particles.length < 650) particles.push(p);
+  }
 
-  <div class="gift-wrap">
-    <div class="gift-stage">
-      <div class="shadow" aria-hidden="true"></div>
-      <div class="gift-float">
-        <button class="gift" id="gift" type="button" aria-expanded="false" aria-label="Mở món quà">
-          <span class="rays"></span>
-          <span class="letter">♥</span>
-          <span class="box"><span class="ribbon-v"></span></span>
-          <span class="glow"></span>
-          <span class="lid">
-            <span class="lid-ribbon"></span>
-            <span class="bow"><i class="loop l"></i><i class="loop r"></i><i class="knot"></i></span>
-          </span>
-        </button>
-      </div>
-    </div>
-  </div>
+  function burst(x,y,power=1) {
+    const count = Math.round(55*power);
 
-  <p class="hint" id="hint">🎀 Chạm vào món quà để khám phá điều bất ngờ 🎀</p>
+    for(let i=0;i<count;i++) {
+      const angle = Math.random()*Math.PI*2;
+      const speed = random(100,300)*power;
 
-  <section class="card" id="card" tabindex="-1" aria-label="Lời chúc" hidden>
-    <h2 class="greet stagger" id="greet"></h2>
-    <div class="divider stagger" aria-hidden="true">🌹</div>
-    <div class="card-body" id="cardBody"></div>
-    <p class="closing stagger" id="closing"></p>
-    <p class="from stagger" id="from" hidden></p>
-    <div class="actions stagger">
-      <button class="btn primary" id="celebrateBtn" type="button">🎆 Gửi ngàn yêu thương</button>
-      <button class="btn ghost" id="replayBtn" type="button">↺ Mở lại món quà</button>
-    </div>
-  </section>
-</main>
+      addParticle({
+        type:'spark',
+        x,y,
+        vx:Math.cos(angle)*speed,
+        vy:Math.sin(angle)*speed,
+        life:0,
+        max:random(.8,1.5),
+        color:pick(Math.random()<.5?GOLD:PINK),
+        size:random(1.5,3)
+      });
+    }
 
-<script>
-(() => {
-  'use strict';
+    start();
+  }
 
-  /* =====================================================
-     ✏️ SỬA NỘI DUNG Ở ĐÂY
-     - {name} sẽ được thay bằng tên cô (hiển thị nổi bật)
-     - from: để trống nếu không muốn ký tên, ví dụ 'Học sinh lớp 12A1'
-     ===================================================== */
-  const CONFIG = {
-    teacher: 'Trâm',
-    from: '',
-    greeting: 'Gửi cô {name} kính yêu,',
-    paragraphs: [
-      'Nhân ngày Nhà giáo Việt Nam 20/11, kính chúc cô {name} một ngày thật vui vẻ và ý nghĩa!',
-      'Chúc cô luôn tràn đầy niềm vui, hạnh phúc và thật nhiều sức khỏe.',
-      'Mong cô luôn giữ mãi nụ cười, sự nhiệt huyết và nét trẻ trung trên hành trình trồng người.',
-      'Cảm ơn cô vì những bài học, sự tận tâm và những điều tốt đẹp cô đã dành cho chúng em. ❤️'
-    ],
-    closing: 'Chúc cô luôn hạnh phúc và thành công!'
-  };
+  function rocket(x,y) {
+    addParticle({
+      type:'rocket',
+      x,
+      y:H+10,
+      target:y,
+      vy:-random(550,850)
+    });
 
-  const $ = id => document.getElementById(id);
-  const scene = $('scene'), gift = $('gift'), hint = $('hint'), card = $('card');
-  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const rnd = (a, b) => a + Math.random() * (b - a);
-  const pick = a => a[(Math.random() * a.length) | 0];
+    start();
+  }
 
-  /* ================= Hiệu ứng canvas ================= */
-  const fx = (() => {
-    const cv = $('fx'), ctx = cv.getContext('2d');
-    const small = Math.min(innerWidth, innerHeight) < 500;
-    const GOLD = ['#ffe0a1', '#ffcf7a', '#ffbd62', '#fff3c9'];
-    const PINK = ['#ff8fa8', '#ff5c7c', '#ffb3c6', '#ff6f91'];
-    const ALL = GOLD.concat(PINK, ['#ffffff']);
-    let W = 0, H = 0, parts = [], dust = [], raf = 0, last = 0;
+  function rain(count=70) {
+    for(let i=0;i<count;i++) {
+      addParticle({
+        type:pick(['petal','petal','heart','conf']),
+        x:random(0,W),
+        y:random(-H,0),
+        vx:random(-25,25),
+        vy:random(65,150),
+        rot:random(0,6.28),
+        vr:random(-3,3),
+        size:random(6,12),
+        color:pick(ALL),
+        swing:random(0,6.28)
+      });
+    }
 
-    function resize() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      W = innerWidth; H = innerHeight;
-      cv.width = Math.round(W * dpr);
-      cv.height = Math.round(H * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      if (!dust.length && !reduceMotion) {
-        const n = small ? 26 : 46;
-        for (let i = 0; i < n; i++) {
-          dust.push({ x: rnd(0, W), y: rnd(0, H), r: rnd(.8, 2.2), v: rnd(6, 18), s: rnd(.6, 1.6), p: rnd(0, 6.28) });
-        }
+    start();
+  }
+
+  function update(p,dt) {
+    if(p.type==='spark') {
+      p.life+=dt;
+      p.vx*=Math.max(0,1-1.8*dt);
+      p.vy=p.vy*(1-1.8*dt)+180*dt;
+      p.x+=p.vx*dt;
+      p.y+=p.vy*dt;
+
+      if(p.life>=p.max) p.dead=true;
+    }
+
+    else if(p.type==='rocket') {
+      p.y+=p.vy*dt;
+
+      if(p.y<=p.target) {
+        p.dead=true;
+        burst(p.x,p.y,.8);
       }
     }
 
-    function add(p) { if (parts.length < 700) parts.push(p); }
+    else {
+      p.swing+=dt*2.5;
+      p.x+=(p.vx+Math.sin(p.swing)*30)*dt;
+      p.y+=p.vy*dt;
+      p.rot+=p.vr*dt;
 
-    function burst(x, y, power = 1) {
-      const n = Math.round((reduceMotion ? 16 : small ? 34 : 52) * power);
-      const palette = Math.random() < .5 ? GOLD : pick([PINK, ALL]);
-      const base = rnd(200, 290) * (small ? .85 : 1) * Math.max(.6, power);
-      for (let i = 0; i < n; i++) {
-        const a = (i / n) * Math.PI * 2 + rnd(-.08, .08);
-        const sp = base * (.55 + Math.random() * .45);
-        add({ t: 'spark', x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 0, max: rnd(.9, 1.4), c: pick(palette), w: rnd(1.6, 2.6) });
-      }
-      kick();
+      if(p.y>H+30) p.dead=true;
     }
+  }
 
-    function rocket(x, ty) {
-      x = x == null ? rnd(W * .15, W * .85) : x;
-      ty = ty == null ? rnd(H * .14, H * .42) : ty;
-      const dur = rnd(.8, 1.1);
-      add({ t: 'rocket', x, y: H + 8, vy: -(H + 8 - ty) / dur, ty });
-      kick();
-    }
+  function draw(p) {
+    ctx.save();
 
-    function rain(count) {
-      const n = reduceMotion ? Math.min(count, 12) : count;
-      for (let i = 0; i < n; i++) {
-        add({
-          t: pick(['petal', 'petal', 'heart', 'conf']),
-          x: rnd(0, W), y: rnd(-H * .5, -20),
-          vx: rnd(-20, 20), vy: rnd(70, 160),
-          rot: rnd(0, 6.28), vr: rnd(-3, 3),
-          s: rnd(6, 12), sw: rnd(0, 6.28), sws: rnd(1.5, 3),
-          c: pick(ALL)
-        });
-      }
-      kick();
-    }
+    if(p.type==='spark') {
+      const alpha=1-p.life/p.max;
 
-    function update(p, dt) {
-      switch (p.t) {
-        case 'spark':
-          p.life += dt;
-          if (p.life >= p.max) { p.dead = true; return; }
-          p.vx *= 1 - 1.8 * dt;
-          p.vy = p.vy * (1 - 1.8 * dt) + 160 * dt;
-          p.x += p.vx * dt; p.y += p.vy * dt;
-          break;
-        case 'rocket':
-          p.y += p.vy * dt;
-          add({ t: 'spark', x: p.x, y: p.y, vx: rnd(-12, 12), vy: rnd(10, 40), life: 0, max: .45, c: '#ffd88a', w: 1.5 });
-          if (p.y <= p.ty) { burst(p.x, p.y, 1); p.dead = true; }
-          break;
-        default:
-          p.sw += p.sws * dt;
-          p.x += (p.vx + Math.sin(p.sw) * 35) * dt;
-          p.y += p.vy * dt;
-          p.rot += p.vr * dt;
-          if (p.y > H + 30) p.dead = true;
-      }
-    }
+      ctx.globalCompositeOperation='lighter';
+      ctx.globalAlpha=alpha*alpha;
+      ctx.strokeStyle=p.color;
+      ctx.lineWidth=p.size;
+      ctx.lineCap='round';
 
-    function draw(p) {
-      if (p.t === 'spark') {
-        ctx.globalCompositeOperation = 'lighter';
-        const a = 1 - p.life / p.max;
-        ctx.globalAlpha = a * a;
-        ctx.strokeStyle = p.c; ctx.lineWidth = p.w; ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(p.x - p.vx * .045, p.y - p.vy * .045);
-        ctx.lineTo(p.x, p.y);
-        ctx.stroke();
-        return;
-      }
-      if (p.t === 'rocket') {
-        ctx.globalCompositeOperation = 'lighter';
-        ctx.globalAlpha = 1; ctx.fillStyle = '#fff1c4';
-        ctx.beginPath(); ctx.arc(p.x, p.y, 2.4, 0, 6.283); ctx.fill();
-        return;
-      }
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.globalAlpha = .92; ctx.fillStyle = p.c;
-      ctx.save();
-      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-      const s = p.s;
       ctx.beginPath();
-      if (p.t === 'petal') {
-        ctx.moveTo(0, -s);
-        ctx.quadraticCurveTo(s * .9, -s * .2, 0, s);
-        ctx.quadraticCurveTo(-s * .9, -s * .2, 0, -s);
-      } else if (p.t === 'heart') {
-        ctx.moveTo(0, s * .7);
-        ctx.bezierCurveTo(-s * 1.2, -s * .1, -s * .6, -s * .95, 0, -s * .35);
-        ctx.bezierCurveTo(s * .6, -s * .95, s * 1.2, -s * .1, 0, s * .7);
-      } else {
-        ctx.scale(1, Math.cos(p.sw * 2));
-        ctx.rect(-s / 2, -s * .3, s, s * .6);
-      }
+      ctx.moveTo(p.x-p.vx*.04,p.y-p.vy*.04);
+      ctx.lineTo(p.x,p.y);
+      ctx.stroke();
+    }
+
+    else if(p.type==='rocket') {
+      ctx.globalCompositeOperation='lighter';
+      ctx.fillStyle='#fff1c4';
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,2.5,0,Math.PI*2);
       ctx.fill();
-      ctx.restore();
     }
 
-    function drawDust(t, dt) {
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = '#ffe0a1';
-      for (const d of dust) {
-        d.y -= d.v * dt;
-        d.x += Math.sin(t * d.s + d.p) * 8 * dt;
-        if (d.y < -6) { d.y = H + 6; d.x = rnd(0, W); }
-        ctx.globalAlpha = .15 + .5 * (.5 + .5 * Math.sin(t * d.s * 2 + d.p));
-        ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 6.283); ctx.fill();
+    else {
+      ctx.globalAlpha=.9;
+      ctx.fillStyle=p.color;
+      ctx.translate(p.x,p.y);
+      ctx.rotate(p.rot);
+
+      const s=p.size;
+
+      ctx.beginPath();
+
+      if(p.type==='petal') {
+        ctx.moveTo(0,-s);
+        ctx.quadraticCurveTo(s,-s*.2,0,s);
+        ctx.quadraticCurveTo(-s,-s*.2,0,-s);
+      }
+
+      else if(p.type==='heart') {
+        ctx.moveTo(0,s*.7);
+        ctx.bezierCurveTo(-s*1.2,-s*.1,-s*.6,-s*.95,0,-s*.35);
+        ctx.bezierCurveTo(s*.6,-s*.95,s*1.2,-s*.1,0,s*.7);
+      }
+
+      else {
+        ctx.rect(-s/2,-s*.3,s,s*.6);
+      }
+
+      ctx.fill();
+    }
+
+    ctx.restore();
+  }
+
+  function frame(now) {
+    const dt=Math.min(.04,(now-last)/1000 || 0);
+    last=now;
+
+    ctx.clearRect(0,0,W,H);
+
+    const newParticles=[];
+    let write=0;
+
+    for(let i=0;i<particles.length;i++) {
+      const p=particles[i];
+      update(p,dt);
+
+      if(!p.dead) {
+        draw(p);
+        particles[write++]=p;
       }
     }
 
-    function step(now) {
-      const dt = Math.min(.05, (now - last) / 1000 || 0);
-      last = now;
-      ctx.clearRect(0, 0, W, H);
-      if (!reduceMotion) drawDust(now / 1000, dt);
-      let w = 0;
-     
+    particles.length=write;
+
+    if(particles.length) {
+      raf=requestAnimationFrame(frame);
+    } else {
+      raf=0;
+      ctx.clearRect(0,0,W,H);
+    }
+  }
+
+  function start() {
+    if(!raf) {
+      last=performance.now();
+      raf=requestAnimationFrame(frame);
+    }
+  }
+
+  function clearEffects() {
+    particles=[];
+    if(raf) cancelAnimationFrame(raf);
+    raf=0;
+    ctx.clearRect(0,0,W,H);
+  }
+
+  function openGift() {
+    if(opened) return;
+
+    opened=true;
+
+    scene.classList.add('open');
+
+    gift.setAttribute('aria-expanded','true');
+
+    hint.style.display='none';
+
+    setTimeout(() => {
+      card.hidden=false;
+      scene.classList.add('revealed');
+
+      card.focus({preventScroll:true});
+
+      rain(45);
+      burst(W/2,H*.42,1.5);
+
+      setTimeout(()=>rocket(W*.25,H*.3),300);
+      setTimeout(()=>rocket(W*.75,H*.25),650);
+      setTimeout(()=>rocket(W*.5,H*.2),1000);
+
+    },650);
+  }
+
+  function celebrate() {
+    burst(W*.5,H*.4,1.8);
+    burst(W*.2,H*.3,1);
+    burst(W*.8,H*.3,1);
+
+    rocket(W*.25,H*.25);
+    rocket(W*.5,H*.18);
+    rocket(W*.75,H*.25);
+
+    rain(65);
+  }
+
+  function replay() {
+    opened=false;
+
+    clearEffects();
+
+    scene.classList.remove('open','revealed');
+    card.hidden=true;
+
+    gift.setAttribute('aria-expanded','false');
+    hint.style.display='block';
+
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  gift.addEventListener('click',openGift);
+  $('celebrateBtn').addEventListener('click',celebrate);
+  $('replayBtn').addEventListener('click',replay);
+
+})();
+</script>
+
+</body>
+</html>
+
